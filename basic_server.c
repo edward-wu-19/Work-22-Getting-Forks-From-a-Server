@@ -12,15 +12,13 @@ int main() {
     //   from_client = server_handshake( &to_client );;
         from_client = server_setup();
 
-        to_client = server_handshake(&from_client);
-
         f = fork();
         if (f){
             //parent or server
         }
         else{
             // child or subserver
-            server_connect(from_client);
+            int to_client = server_connect(from_client);
 
             char* tmp = line;
             i = 0;

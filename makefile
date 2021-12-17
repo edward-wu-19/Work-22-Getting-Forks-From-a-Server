@@ -20,4 +20,4 @@ clean:
 	rm *.o
 	rm client
 	rm server
-	rm WKP
+	rm mario

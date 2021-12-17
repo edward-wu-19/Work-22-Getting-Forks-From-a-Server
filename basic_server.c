@@ -26,9 +26,7 @@ int main() {
             // printf("A\n");
 
             while (1){
-                if (read(from_client, line, LEN) == 0){
-                    break;
-                };
+                read(from_client, line, LEN);
 
                 // char* tmp = line;
                 // int i = 0;

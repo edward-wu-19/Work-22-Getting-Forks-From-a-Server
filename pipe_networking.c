@@ -40,6 +40,7 @@ int server_setup() {
 int server_connect(int from_client) {
   int to_client  = 0;
 
+
     char buffer[HANDSHAKE_BUFFER_SIZE];
     //read initial message
   int b = read(from_client, buffer, sizeof(buffer));

@@ -1,6 +1,5 @@
 #include "pipe_networking.h"
 
-
 int main() {
 
     int to_client;
@@ -13,7 +12,7 @@ int main() {
     //   from_client = server_handshake( &to_client );;
         from_client = server_setup();
 
-        to_client = server_connect(from_client);
+        to_client = server_handshake(from_client);
 
         f = fork();
         if (f){

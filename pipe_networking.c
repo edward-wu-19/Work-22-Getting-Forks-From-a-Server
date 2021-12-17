@@ -38,20 +38,20 @@ int server_setup() {
   returns the file descriptor for the downstream pipe.
   =========================*/
 int server_connect(int from_client) {
-  int *to_client  = 0;
+  int to_client  = 0;
 
     char buffer[HANDSHAKE_BUFFER_SIZE];
     //read initial message
   int b = read(from_client, buffer, sizeof(buffer));
   printf("[server] handshake received: -%s-\n", buffer);
 
-  *to_client = open(buffer, O_WRONLY, 0);
+  to_client = open(buffer, O_WRONLY, 0);
   //create SYN_ACK message
   srand(time(NULL));
   int r = rand() % HANDSHAKE_BUFFER_SIZE;
   sprintf(buffer, "%d", r);
 
-  write(*to_client, buffer, sizeof(buffer));
+  write(to_client, buffer, sizeof(buffer));
   //rad and check ACK
   read(from_client, buffer, sizeof(buffer));
   int ra = atoi(buffer);

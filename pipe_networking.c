@@ -28,6 +28,8 @@ int server_setup() {
   //read initial message
   b = read(from_client, buffer, sizeof(buffer));
   printf("[server] handshake received: -%s-\n", buffer);
+  
+  return from_client;
 }
 
 /*=========================
@@ -38,7 +40,6 @@ int server_setup() {
   =========================*/
 int server_connect(int from_client) {
   int to_client  = 0;
-
 
     char buffer[HANDSHAKE_BUFFER_SIZE];
     //read initial message

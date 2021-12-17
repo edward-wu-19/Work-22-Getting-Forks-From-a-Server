@@ -20,6 +20,8 @@ int main() {
         }
         else{
             // child or subserver
+            server_connect(from_client);
+
             char* tmp = line;
             i = 0;
 

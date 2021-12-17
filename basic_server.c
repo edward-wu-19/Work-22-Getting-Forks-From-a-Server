@@ -7,34 +7,41 @@ int main() {
     int from_client;
     
     char line[LEN];
-    int i;
+    int i, f;
 
     while (1){
-      from_client = server_handshake( &to_client );;
+    //   from_client = server_handshake( &to_client );;
+        from_client = server_setup();
 
-    // int pToC = open("pToC", O_RDONLY);
-    // int cToP = open("cToP", O_WRONLY);
+        to_client = server_connect(from_client);
 
-    char* tmp = line;
-    i = 0;
+        f = fork();
+        if (f){
+            //parent or server
+        }
+        else{
+            // child or subserver
+            char* tmp = line;
+            i = 0;
 
-      // printf("A\n");
+            // printf("A\n");
 
-      while (1){
-          if (read(from_client, line, LEN) == 0){
-            break;
-          };
+            while (1){
+                if (read(from_client, line, LEN) == 0){
+                    break;
+                };
 
-          // char* tmp = line;
-          // int i = 0;
-          while (i < LEN){
-              *tmp = toupper(*tmp);
-              tmp++;
-              i++;
-          }
+                // char* tmp = line;
+                // int i = 0;
+                while (i < LEN){
+                    *tmp = toupper(*tmp);
+                    tmp++;
+                    i++;
+                }
 
-          write(to_client, line, LEN);
-      }
+                write(to_client, line, LEN);
+            }
+        }
 
     }
 

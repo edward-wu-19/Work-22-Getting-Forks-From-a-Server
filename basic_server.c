@@ -28,8 +28,8 @@ int main() {
             while (1){
                 read(from_client, line, LEN);
 
-                // char* tmp = line;
-                // int i = 0;
+                char* tmp = line;
+                int i = 0;
                 while (i < LEN){
                     *tmp = toupper(*tmp);
                     tmp++;

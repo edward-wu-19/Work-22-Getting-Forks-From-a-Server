@@ -10,25 +10,24 @@
   returns the file descriptor for the upstream pipe.
   =========================*/
 int server_setup() {
-  int from_client = 0;
-
-  int b = mkfifo("WKP", 0600);
+  int b, from_client;
+  char buffer[HANDSHAKE_BUFFER_SIZE];
 
   printf("[server] handshake: making wkp\n");
-
+  b = mkfifo(WKP, 0600);
   if ( b == -1 ) {
     printf("mkfifo error %d: %s\n", errno, strerror(errno));
     exit(-1);
   }
   //open & block
   from_client = open(WKP, O_RDONLY, 0);
-
   //remove WKP
   remove(WKP);
 
   printf("[server] handshake: removed wkp\n");
-
-  return from_client;
+  //read initial message
+  b = read(from_client, buffer, sizeof(buffer));
+  printf("[server] handshake received: -%s-\n", buffer);
 }
 
 /*=========================

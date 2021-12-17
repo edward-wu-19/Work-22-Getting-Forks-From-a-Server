@@ -12,7 +12,7 @@ int main() {
     //   from_client = server_handshake( &to_client );;
         from_client = server_setup();
 
-        to_client = server_handshake(from_client);
+        to_client = server_handshake(&from_client);
 
         f = fork();
         if (f){

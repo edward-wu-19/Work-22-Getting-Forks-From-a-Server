@@ -22,12 +22,8 @@ int server_setup() {
   //open & block
   from_client = open(WKP, O_RDONLY, 0);
   //remove WKP
-  remove(WKP);
-
   printf("[server] handshake: removed wkp\n");
-  //read initial message
-  b = read(from_client, buffer, sizeof(buffer));
-  printf("[server] handshake received: -%s-\n", buffer);
+  remove(WKP);
   
   return from_client;
 }
@@ -42,6 +38,7 @@ int server_connect(int from_client) {
   int to_client  = 0;
 
     char buffer[HANDSHAKE_BUFFER_SIZE];
+
     //read initial message
   int b = read(from_client, buffer, sizeof(buffer));
   printf("[server] handshake received: -%s-\n", buffer);

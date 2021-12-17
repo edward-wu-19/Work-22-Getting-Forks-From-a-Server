@@ -1,17 +1,22 @@
-all: interface.o worker.o
-	gcc -o interface interface.o
-	gcc -o worker worker.o
+all: client server
 
-interface.o:
-	gcc -c interface.c
 
-worker.o:
-	gcc -c worker.c
+client: basic_client.o pipe_networking.o
+	gcc -o client basic_client.o pipe_networking.o
+
+server: basic_server.o pipe_networking.o
+	gcc -o server basic_server.o pipe_networking.o
+
+basic_client.o: basic_client.c pipe_networking.h
+	gcc -c basic_client.c
+
+basic_server.o: basic_server.c pipe_networking.h
+	gcc -c basic_server.c
+
+pipe_networking.o: pipe_networking.c pipe_networking.h
+	gcc -c pipe_networking.c
 
 clean:
-	rm interface.o
-	rm worker.o
-	rm interface
-	rm worker
-	rm pToC
-	rm cToP
+	rm *.o
+	rm client
+	rm server
